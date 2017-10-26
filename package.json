@@ -1,5 +1,5 @@
 {
-  "name": "profs-react-demo",
+  "name": "blockchainexplorer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,6 +20,7 @@
     "express": "^4.15.4",
     "pg": "^7.3.0",
     "react": "^15.6.1",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^15.6.1",
     "webpack": "^3.5.6"
   }
