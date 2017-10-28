@@ -1,13 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import DatePicker from './DatePicker'
 import Blocks from './Blocks'
+import { loadBlocks } from '../store'
 
-const Main = () => (
-    <div className="container">
-        <DatePicker />
-        <Blocks />
-    </div>
-)
+class Main extends Component {
+    componentDidMount() {
+        this.props.fetchInitialData()
+    }
+    render() {
+        return (
+            <div className="container">
+                <DatePicker />
+                <Blocks />
+            </div>
+        )
+    }
+}
 
-export default Main
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchInitialData: () => {
+            dispatch(loadBlocks())
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Main)

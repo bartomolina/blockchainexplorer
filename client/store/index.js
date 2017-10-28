@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
+import axios from 'axios'
 
 const GET_BLOCKS = 'GET_BLOCKS'
 
@@ -14,11 +15,13 @@ export function loadBlocks(blocks) {
             .then(blocks => {
                 dispatch(getBlocks(blocks))
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                return console.log(err)
+            })
     }
 }
 
-const blocksReducer = function reducer(state = { blocks: [] }, action) {
+const blocksReducer = function reducer(state = { blocks: [1, 2] }, action) {
     switch (action.type) {
         case GET_BLOCKS:
             return action.blocks
@@ -31,4 +34,4 @@ const rootReducer = combineReducers({
     blocksReducer
 })
 
-export default createStore(rootReducer)
+export default createStore(rootReducer, applyMiddleware(thunk))
