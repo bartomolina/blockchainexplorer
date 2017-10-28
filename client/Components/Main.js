@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import DatePicker from './DatePicker'
+import NavBar from './NavBar'
 import Blocks from './Blocks'
 import { loadBlocks } from '../store'
 
@@ -12,7 +12,7 @@ class Main extends Component {
     render() {
         return (
             <div className="container">
-                <DatePicker />
+                <NavBar />
                 <Blocks />
             </div>
         )
