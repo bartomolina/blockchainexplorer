@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const Blocks = ({ blocks }) => (
-
     <div className="panel panel-default">
         <div className="panel-heading">Blocks</div>
         <table className="table">

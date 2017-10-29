@@ -9,9 +9,9 @@ export function getBlocks(blocks) {
     return { type: GET_BLOCKS, blocks }
 }
 
-export function loadBlocks(blocks) {
+export function loadBlocks(date) {
     return function thunk(dispatch) {
-        return axios.get('http://localhost:3001/insight-api/blocks?limit=10&blockDate=2013-02-03')
+        return axios.get(`http://localhost:3001/insight-api/blocks?limit=5000&blockDate=${date}`)
             .then(res => res.data)
             .then(blocks => {
                 dispatch(getBlocks(blocks))

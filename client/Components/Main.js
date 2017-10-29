@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import NavBar from './NavBar'
+import Chart from './Chart'
 import Blocks from './Blocks'
 import { loadBlocks } from '../store'
 
@@ -13,6 +14,7 @@ class Main extends Component {
         return (
             <div className="container">
                 <NavBar />
+                <Chart />
                 <Blocks />
             </div>
         )
@@ -22,7 +24,7 @@ class Main extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchInitialData: () => {
-            dispatch(loadBlocks())
+            dispatch(loadBlocks('2013-02-03'))
         }
     }
 }
