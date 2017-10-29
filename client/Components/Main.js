@@ -5,19 +5,39 @@ import NavBar from './NavBar'
 import Chart from './Chart'
 import Blocks from './Blocks'
 import { loadBlocks } from '../store'
+import Loadable from 'react-loading-overlay'
 
 class Main extends Component {
+
+    constructor() {
+        super()
+    }
+
     componentDidMount() {
         this.props.fetchInitialData()
     }
+
     render() {
+        const { loading } = this.props
+
         return (
-            <div className="container">
-                <NavBar />
-                <Chart />
-                <Blocks />
-            </div>
+            <Loadable
+                active={loading}
+                spinner
+                text="Loading...">
+                <div className="container">
+                    <NavBar />
+                    <Chart />
+                    <Blocks />
+                </div>
+            </Loadable>
         )
+    }
+}
+
+const mapStateToProps = ({ loading }) => {
+    return {
+        loading
     }
 }
 
@@ -29,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
