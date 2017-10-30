@@ -25,11 +25,13 @@ class DatePicker extends Component {
         const { handleDayChange } = this.props
 
         return (
-            <form className="navbar-form navbar-left">
-                <div className="form-group">
-                    <input ref="datepicker" data-date-format="yyyy-mm-dd" id="datepicker" type="text" className="form-control" placeholder="Pick a day" />
-                </div>
-            </form>)
+            <div className="container">
+                <form className="col-xs-2">
+                    <div className="form-group">
+                        <input ref="datepicker" data-date-format="yyyy-mm-dd" id="datepicker" type="text" className="form-control" placeholder="Pick a day" />
+                    </div>
+                </form>
+            </div>)
     }
 }
 

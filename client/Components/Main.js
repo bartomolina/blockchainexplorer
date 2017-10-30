@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Route, withRouter } from 'react-router-dom'
 
 import NavBar from './NavBar'
 import Chart from './Chart'
 import Blocks from './Blocks'
 import { loadBlocks } from '../store'
 import Loadable from 'react-loading-overlay'
+import DatePicker from './DatePicker'
+import Wallet from './Wallet'
 
 class Main extends Component {
 
@@ -27,8 +30,10 @@ class Main extends Component {
                 text="Loading...">
                 <div className="container">
                     <NavBar />
-                    <Chart />
-                    <Blocks />
+                    <Route exact path="/" component={DatePicker} />
+                    <Route exact path="/" component={Chart} />
+                    <Route exact path="/" component={Blocks} />
+                    <Route exact path="/wallet" component={Wallet} />
                 </div>
             </Loadable>
         )
@@ -49,4 +54,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main))
