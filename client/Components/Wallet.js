@@ -1,41 +1,67 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import QrReader from 'react-qr-reader'
 
-const Wallet = ({ blocks, sendMoney, handleError, handleScan }) => (
-    <div>
-        <QrReader
-            delay="100"
-            style={{ height: 240, width: 320 }}
-            onError={handleError}
-            onScan={handleScan}
-        />
-        <input type="button" onClick={sendMoney} value="Send Money" />
-    </div>
-)
+class Wallet extends Component {
+
+    constructor() {
+        super()
+        this.state = {
+            destWallet: ''
+        }
+
+        this.scan = this.scan.bind(this)
+        this.errorScanning = this.errorScanning.bind(this)
+        this.handleSendMoney = this.handleSendMoney.bind(this)
+    }
+
+    handleSendMoney(e) {
+        console.log(this.state.destWallet)
+        this.props.sendMoney(this.state.destWallet)
+    }
+
+    scan(e) {
+        if (e)
+            this.setState({ destWallet: e.slice(8) })
+    }
+
+    errorScanning(e) {
+        if (e)
+            alert(e)
+    }
+
+    render() {
+        const { blocks, sendMoney } = this.props
+        const { destWallet } = this.state
+        const { scan, errorScanning, handleSendMoney } = this
+
+        return (
+            <div className="container">
+                <QrReader
+                    delay={100}
+                    style={{ height: 240, width: 320 }}
+                    onScan={scan}
+                    onError={errorScanning}
+                />
+                <br />
+                <input type="text" value={destWallet} className="walletInput" />
+                <br />
+                <br />
+                <input type="button" onClick={handleSendMoney} value="Send Money" />
+            </div>
+        )
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        sendMoney: e => {
-            return axios.post(`/wallet`, {})
+        sendMoney: address => {
+            console.log(address)
+            return axios.post(`/wallet`, { address })
                 .catch(err => console.log(err))
-        },
-
-        handleError: e => {
-
-        },
-
-        handleScan: e => {
-
         }
     }
 }
 
-const mapStateToProps = ({ blocks }) => {
-    return {
-        blocks
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Wallet)
+export default connect(null, mapDispatchToProps)(Wallet)

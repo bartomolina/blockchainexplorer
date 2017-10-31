@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, withRouter } from 'react-router-dom'
-
 import NavBar from './NavBar'
 import Chart from './Chart'
 import Blocks from './Blocks'
@@ -9,6 +8,7 @@ import { loadBlocks } from '../store'
 import Loadable from 'react-loading-overlay'
 import DatePicker from './DatePicker'
 import Wallet from './Wallet'
+import Transactions from './Transactions'
 
 class Main extends Component {
 
@@ -34,6 +34,7 @@ class Main extends Component {
                     <Route exact path="/" component={Chart} />
                     <Route exact path="/" component={Blocks} />
                     <Route exact path="/wallet" component={Wallet} />
+                    <Route exact path="/transactions/:blockHash" component={Transactions} />
                 </div>
             </Loadable>
         )
